@@ -1,0 +1,75 @@
+#ifndef _LIST_H
+#define _LIST_H
+#include <stdbool.h>
+struct node
+{
+  int data;
+  struct node *next;
+};
+struct linenode;
+typedef struct node node;
+struct node* randList(int n);
+struct node* randSortedList(int n);
+struct node* initList(int a[],int n);
+struct node* copyList(struct node *n);
+void printList(struct node* n);
+void push(struct node** head_ref,int new_data);
+void append(struct node** head_ref,int new_data);
+void appendList(struct node** head_ref,struct node *tail);
+void insertAfter(struct node* prev,int new_data);
+void deleteNode(struct node** head_ref,int key);
+int getCount(struct node* head);
+bool search(struct node* head,int x);
+int getNth(struct node* head,int index);
+void removeNode(struct node* node_ptr);
+void printMiddle(struct node *head);
+void printNthFromLast(struct node* head,int n);
+void deleteList(struct node** head_ref);
+int count(struct node* head,int seach_for);
+void reverse(struct node ** head_ref);
+bool hasloop(struct node *head);
+bool isPalindrome(struct node *head);
+int compareList(struct node *first,struct node *second);
+bool isEqualList(struct node *first,struct node *second);
+void insert_in_sorted(struct node **head_ref,int new_data);
+int getIntesectionNode(struct node* head1,struct node* head2);
+void recursive_reverse_print(struct node *n);
+void remove_duplicate_from_unsorted(struct node *head_ref);
+void remove_duplicate_from_sorted(struct node *head_ref);
+void pairWiseSwap(struct node *head);
+void moveToFront(struct node **head_ref);
+struct node* sortedMerge(struct node* a,struct node *b);
+struct node *sortedIntersect(struct node *a,struct node *b);
+void deleteAlt(struct node *head);
+void alteratingSplit(struct node* source,struct node** aRef,struct node **bRef);
+bool isIdentical(struct node *a,struct node *b);
+void frontBackSplit(struct node *a,struct node **a_ref,struct node **b_ref);
+void mergeSort(struct node **head_ref);
+bool isSorted(struct node *n);
+struct node *reverseInGroups(struct node *head,int k);
+struct node *kAltReverse(struct node *head,int k);
+struct node *kAltReverse_i(struct node *head,int k);
+void delLesserNodes(struct node **head_ref);
+void delLesserNodes2(struct node **head_ref);
+void segregateEvenOdd(struct node **head_ref);
+bool detectAndRemoveLoop(struct node *n);
+struct node* addTwoLists(struct node *first,struct node *second);
+bool contains(struct node *n,int data);
+struct node* getUnion(struct node *head1,struct node *head2);
+struct node* getIntesection(struct node *head1,struct node *head2);
+bool isSumSorted(struct node *headA,struct node *headB,struct node *headC,int sum);
+void rotate(struct node **head_ref,int k);
+struct node *deepCopy(struct node * n);
+void addList(struct node *head1,struct node *head2,struct node **result);
+void sortList(struct node *head);
+void skipMdeleteN(struct node *head,int M,int N);
+void quickSort(struct node *head);
+void printListBetween(struct node *head,struct node* end);
+void merge(struct node *p,struct node **q);
+void pairWiseSwap2(struct node **head_ref);
+struct linenode *deleteMiddle(struct linenode *head);
+void printLineList(struct linenode *head);
+void pushLine(struct linenode **head_ref,int x,int y);
+struct node* findMaxSumList(struct node *a,struct node *b);
+void insertSort(struct node **head_ref);
+#endif
