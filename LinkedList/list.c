@@ -1,4 +1,4 @@
-#include "list.h"
+1#include "list.h"
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -1300,4 +1300,21 @@ void insertSort(struct node **head_ref)
     curr = next;
   }
   *head_ref = sorted;
+}
+void remove_if(struct node **head_ref,remove_fn rm)
+{
+  struct node *next =NULL;
+  while(*head_ref!=NULL)
+  {
+    if(rm(*head_ref))
+    {
+      next = (*head_ref)->next;
+      free(*head_ref);
+      *head_ref = next;
+    }
+    else
+    {
+      head_ref = &(*head_ref)->next;
+    }
+  }
 }

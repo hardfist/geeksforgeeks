@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+vector<int> build_sa(const char *txt)
+{
+  int n = strlen(txt);
+  vector<int> sa(n+1);
+  vector<int> rank(n+1);
+  int tmp[n+1];
+  for(int i=0;i<=n;i++)
+  {
+    sa[i] = i;
+    rank[i] = txt[i];
+  }
+  int k=0;
+  auto cmp = [&k,&rank,&n](int i,int j)
+  {
+    if(rank[i]!=rank[j]) return rank[i] < rank[j];
+    else
+    {
+      int ri = i+k <= n ? rank[i+k] : -1;
+      int rj = j+k <=n ? rank[j+k] : -1;
+      return ri < rj;
+    }
+  };
+  for(k=1;k<=n;k*=2)
+  {
+    sort(sa.begin(),sa.end(),cmp);
+    tmp[sa[0]] = 0;
+    for(int i=1;i<=n;i++)
+    {
+      tmp[sa[i]] = tmp[sa[i-1]] +( cmp(sa[i-1],sa[i]) ? 1 : 0);
+    }
+    for(int i=0;i<=n;i++)
+    {
+      rank[i] = tmp[i];
+    }
+  }
+  return sa;
+}
+// int lower_bound(const char *txt,const char *pat)
+// {
+//   vector<int> res = build_sa(txt);
+  
+// }
+bool contain(const char *txt,const char *pat)
+{
+  vector<int> sa = build_sa(txt);
+  for(int i=0;i<sa.size();i++)
+  {
+    cout<<txt+sa[i]<<endl;
+  }
+  int lo=0,hi=strlen(txt)+1;
+  int m = strlen(pat);
+  // (lo,hi) ?  a[0,lo]<k a[hi,n+1)>=k
+  while(hi-lo>1)
+  {
+    int mid = (lo+hi)/2;
+    int cmp =strncmp(pat,txt+sa[mid],m);
+    if(cmp<0) //a[mid] < k
+    {
+      lo = mid; // (mid,hi) ?
+    }
+    else
+    {
+      // a[mid]>=k
+      hi=mid; // a(lo,hi) ?
+    }
+  }
+  // hi = lo+1 => a[0,lo]<k a[hi,n+1) >=k
+  return strncmp(pat,txt+sa[mid],m) == 0;
+}
+int main()
+{
+  const char *txt = "abcdef";
+  vector<int> res = build_sa(txt);
+  cout<<contain(txt,"abc")<<endl;
+}

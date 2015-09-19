@@ -1,0 +1,70 @@
+#include <vector>
+#include <cassert>
+using namespace std;
+struct Node
+{
+  int data;
+  vector<Node*> child;
+  int k;
+};
+struct Heap
+{
+  Heap(const vector<Node*> trees={})
+      :trees(trees)
+  {}
+  vector<Node*> trees;
+};
+vector<Node*> merge(const vector<Node*> &p,const vector<Node*> &q)
+{
+  vector<Node*> res;
+  int i=0,j=0;
+  int m=p.size(),n=q.size();
+  while(i< m || j<n)
+  {
+    if(i==m)
+    {
+      res.push_back(q[j++]);
+    }
+    else if(j==n)
+    {
+      res.push_back(p[i++]);
+    }
+    else if(p[i]->k < q[i]->k)
+    {
+      res.push_back(p[i++]);
+    }
+    else
+    {
+      res.push_back(q[j++]);
+    }
+  }
+  return res;
+}
+Node* merge(Node *p,Node *q)
+{
+  assert(p&&q);
+  assert(p->k == q->k);
+  if(p->data > q->data)
+  {
+    swap(p,q);
+  }
+  p->child.push_back(q);
+  p->k++;
+  return p;
+}
+Heap merge(const Heap &p,const Heap &q)
+{
+  Heap res=merge(p.trees,q.trees);
+  for(int i=0;i<res.trees.size();i++)
+  {
+    
+  }
+  return res;
+}
+struct Heap
+{
+  
+};
+int main()
+{
+}

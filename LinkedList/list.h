@@ -72,4 +72,6 @@ void printLineList(struct linenode *head);
 void pushLine(struct linenode **head_ref,int x,int y);
 struct node* findMaxSumList(struct node *a,struct node *b);
 void insertSort(struct node **head_ref);
+typedef bool (*remove_fn)(struct node *n);
+void remove_if(struct node **head_ref,remove_fn rm);
 #endif
